@@ -1,15 +1,16 @@
-IMAGE_NAME=buker/k8s-pritunl
-
+IMAGE_NAME ?= buker/k8s-pritunl
+TAG ?= 0.1
+IMAGE = $(IMAGE_NAME):$(TAG)
 build:
-	docker build -t $(IMAGE_NAME) .
+	docker build -t $(IMAGE) .
 	echo 'Image builded'
 
 clean:
-	docker rmi $(IMAGE_NAME) || true
+	docker rmi $(IMAGE) || true
 	echo 'Image removed'
 
-push:
-	docker push $(IMAGE_NAME)
+push: build
+	docker push $(IMAGE)
 	echo 'Image pushed'
 
 all: build push clean
