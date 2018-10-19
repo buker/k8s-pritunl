@@ -15,14 +15,15 @@ services:
       - mongodb
     depends_on:
       - mongodb
+    environment:
+      - PRITUNL_MONGODB_URI=${PRITUNL_MONGODB_URI}
   mongodb:
     image: mongo:latest
     container_name: "mongodb"
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
-      - MONGODB_USER=${MONGODB_USER} 
-      - MONGODB_PASS=${MONGODB_PASS}
+      - MONGO_INITDB_DATABASE=pritunl
     volumes:
       - 'mongodb_data:/data/db'
     ports:

@@ -8,18 +8,17 @@ ENV TERM linux
 RUN set -ex \
     && apt-get update -yqq \
     && apt-get upgrade -yqq\
-    && apt-get install -yqq --no-install-recommends \
+    && apt-get install -yqq \
            gnupg \
            dirmngr \
+           iptables \
     && echo "deb http://repo.pritunl.com/stable/apt bionic main" >> /etc/apt/sources.list.d/pritunl.list \
     && apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A \
     && apt-get update \
-    && apt-get install -yqq --no-install-recommends \
+    && apt-get install -yqq \
         pritunl \ 
-    && apt-get purge -yqq --remove gnupg dirmngr \
     && apt-get clean \
     && rm -rf \
-        /etc/apt/* \
         /var/lib/apt/lists/* \
         /tmp/* \
         /var/tmp/* \
