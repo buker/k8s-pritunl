@@ -25,13 +25,6 @@ if [ -z "$PRITUNL_BIND_ADDR" ]; then
     PRITUNL_BIND_ADDR="0.0.0.0"
 fi
 
-
-## start a local mongodb instance if no mongodb specified through env
-if [ -z "$PRITUNL_MONGODB_URI" ]; then
-  /etc/init.d/mongodb start
-  PRITUNL_MONGODB_URI="mongodb://localhost:27017/pritunl"
-fi
-
 if [ -z "$PRITUNL_DONT_WRITE_CONFIG" ]; then
     cat << EOF > /etc/pritunl.conf
     {
@@ -51,4 +44,3 @@ EOF
 fi
 
 exec /usr/bin/pritunl start -c /etc/pritunl.conf 
-#exec /bin/bash 
